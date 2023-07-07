@@ -44,7 +44,7 @@ const products = [
     category: "Electronics",
     price: 99.59,
     countInStock: 12,
-    rating: 3,
+    rating: 2,
     numReviews: 20,
   },
 ];

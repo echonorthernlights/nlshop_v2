@@ -1,9 +1,8 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Container } from "react-bootstrap";
-import HomeScreen from "./screens/HomeScreen";
 import { Outlet } from "react-router-dom";
-
+// Outlet associated with whatever component/screen to show according to router(route)
 function App() {
   return (
     <>
