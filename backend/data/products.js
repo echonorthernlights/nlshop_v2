@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: "1",
     name: "PlayStation 56",
     image: "../images/ps5.jpg",
     description: "Playstation 5 description",
@@ -12,7 +11,6 @@ const products = [
     numReviews: 11,
   },
   {
-    _id: "2",
     name: "Headphone",
     image: "../images/headphone.jpg",
     description: "Headphone description",
@@ -24,7 +22,6 @@ const products = [
     numReviews: 20,
   },
   {
-    _id: "3",
     name: "MacBook",
     image: "../images/macbook.jpg",
     description: "MacBook description",
@@ -36,7 +33,6 @@ const products = [
     numReviews: 11,
   },
   {
-    _id: "4",
     name: "Alexa",
     image: "../images/alexa.jpg",
     description: "Headphone description",
