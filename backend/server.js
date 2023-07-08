@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
   res.send("API running ...");
 });
 
-app.use("/products", productRouter);
+app.use("/api", productRouter);
 
 app.use(notFound);
 app.use(errorHandler);
