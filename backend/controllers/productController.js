@@ -5,7 +5,7 @@ import asyncHandler from "../middleware/asyncHandler.js";
 //Desc get all products
 //GET /products
 //Access Public
-export const getProducts = asyncHandler(async (req, res) => {
+const getProducts = asyncHandler(async (req, res) => {
   const products = await Product.find({}).lean();
   if (products) {
     return res.status(200).json(products);
@@ -18,7 +18,7 @@ export const getProducts = asyncHandler(async (req, res) => {
 //Desc get product by Id
 //GET /products
 //Access Public
-export const getProduct = asyncHandler(async (req, res) => {
+const getProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const product = await Product.findById(id).lean();
   if (product) {
@@ -28,3 +28,5 @@ export const getProduct = asyncHandler(async (req, res) => {
     throw new Error("Product not found !!!");
   }
 });
+
+export { getProduct, getProducts };

@@ -30,7 +30,7 @@ const ProductScreen = () => {
       </Link>
       <Row>
         <Col md={5}>
-          <img src={product.image} fluid />
+          <Image src={product.image} fluid />
         </Col>
         <Col md={4}>
           <ListGroup variant="flush">
