@@ -3,6 +3,8 @@ import { Row, Col } from "react-bootstrap";
 import axios from "axios";
 import Product from "../components/Product";
 import { useGetProductsQuery } from "../slices/productsApiSlice.js";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 const HomeScreen = () => {
   /*const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -17,9 +19,11 @@ const HomeScreen = () => {
   return (
     <>
       {isLoading ? (
-        <h1>Loading ...</h1>
+        <Loader />
       ) : error ? (
-        <h1>{error.error}</h1>
+        <Message variant="danger">
+          {error?.data?.message || error.error}
+        </Message>
       ) : (
         <>
           {" "}

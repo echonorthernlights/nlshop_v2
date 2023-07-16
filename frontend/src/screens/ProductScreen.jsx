@@ -12,6 +12,8 @@ import {
 import Rating from "../components/Rating";
 import axios from "axios";
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice.js";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
@@ -36,9 +38,11 @@ const ProductScreen = () => {
   return (
     <>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <Loader />
       ) : error ? (
-        <h1>{error.error}</h1>
+        <Message variant="danger">
+          {error?.data?.message || error.error}
+        </Message>
       ) : (
         <>
           <Link className="btn btn-light my-3" to="/">
