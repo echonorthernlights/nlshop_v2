@@ -1,9 +1,9 @@
-// Slices are a way to organize application state => collection of actions and reducers related to each other
-// we can create multiple slices i our app and each slice can have it own state
+// Slices are a way to organize application state => collection of actions and reducers related to
+//each other we can create multiple slices in our app and each slice can have it own state
 
 // API slice is basically the parent to our other api slices
-//---- we can use {createSlice} for regular slices (not async request), since we are dealing with backend
-// we use {createApi} which behave differently
+//---- we can use {createSlice} for regular slices (not async request), since we are dealing with
+// backend we use {createApi} which behave differently
 
 // {fetchBaseQuery} => allows us to make request to backen API
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";

@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import productRouter from "./routes/productRoutes.js";
+import userRouter from "./routes/userRoutes.js";
+
 import connectDB from "./config/connectDB.js";
 
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
@@ -13,7 +15,8 @@ app.get("/", (req, res) => {
   res.send("API running ...");
 });
 
-app.use("/api", productRouter);
+app.use("/api/products", productRouter);
+app.use("/api/users", userRouter);
 
 app.use(notFound);
 app.use(errorHandler);
