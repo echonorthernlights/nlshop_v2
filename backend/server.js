@@ -7,13 +7,20 @@ import userRouter from "./routes/userRoutes.js";
 import connectDB from "./config/connectDB.js";
 
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
-
+import cookieParser from "cookie-parser";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.get("/", (req, res) => {
-  res.send("API running ...");
-});
+//Body parser middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//Cookie parser middleware
+app.use(cookieParser());
+
+// app.get("/", (req, res) => {
+//   res.send("API running ...");
+// });
 
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);

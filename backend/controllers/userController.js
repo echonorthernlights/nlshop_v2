@@ -1,11 +1,33 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import User from "../models/User.js";
+import generateToken from "../utils/generateToken.js";
 
 //@desc auth user + get token
 //@route POST api/users/login
 //@access Public
 const authUser = asyncHandler(async (req, res) => {
-  res.send("auth user");
+  const { email, password } = req.body;
+  const user = await User.findOne({ email }).exec();
+  if (user && (await user.matchPassword(password))) {
+    const token = generateToken(user._id);
+
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      sameSite: "strict",
+      maxAge: 30 * 24 * 3600 * 1000,
+    });
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token,
+    });
+  } else {
+    res.status(401);
+    throw new Error("Incorrect Email or Password");
+  }
 });
 
 //@desc register user
