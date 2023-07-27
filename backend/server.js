@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import orderRouter from "./routes/orderRoutes.js";
 
 import connectDB from "./config/connectDB.js";
 
@@ -24,6 +25,7 @@ app.use(cookieParser());
 
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
+app.use("/api/orders", orderRouter);
 
 app.use(notFound);
 app.use(errorHandler);
