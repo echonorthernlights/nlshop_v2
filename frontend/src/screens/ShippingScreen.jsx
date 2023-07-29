@@ -65,7 +65,7 @@ const ShippingScreen = () => {
           />
         </Form.Group>
         <Form.Group controlId="country" className="my-2">
-          <Form.Label>Address :</Form.Label>
+          <Form.Label>Country :</Form.Label>
           <Form.Control
             name="country"
             type="text"
