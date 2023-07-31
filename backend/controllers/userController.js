@@ -110,8 +110,14 @@ const updateUserPofile = asyncHandler(async (req, res) => {
 //@desc get users
 //@route GET api/users
 //@access Private/Admin
-const getUsers = asyncHandler((req, res) => {
-  res.send("get users");
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({}).select("-password");
+  if (users) {
+    res.status(200).json(users);
+  } else {
+    res.status(404);
+    throw new Error("Users list is empty");
+  }
 });
 
 //@desc delete user
