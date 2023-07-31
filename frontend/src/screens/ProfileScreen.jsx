@@ -11,7 +11,6 @@ import { toast } from "react-toastify";
 import { useProfileMutation } from "../slices/usersApiSlice";
 import { useGetMyOrdersQuery } from "../slices/ordersApiSlice";
 import { setCredentials } from "../slices/authSlice";
-import OrderScreen from "./OrderScreen";
 
 const ProfileScreen = () => {
   const [profile, setProfile] = useState({
