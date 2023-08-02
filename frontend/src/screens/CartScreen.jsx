@@ -51,6 +51,15 @@ const CartScreen = () => {
                   <Col md={2}>${item.price}</Col>
                   <Col md={2}>
                     <Form.Control
+                      type="number"
+                      min={1}
+                      value={item.qty}
+                      max={[...Array(item.countInStock).keys()].length}
+                      onChange={(e) =>
+                        addToCartHandler(item, Number(e.target.value))
+                      }
+                    />
+                    {/* <Form.Control
                       as="select"
                       value={item.qty}
                       onChange={(e) =>
@@ -62,7 +71,7 @@ const CartScreen = () => {
                           {x + 1}
                         </option>
                       ))}
-                    </Form.Control>
+                    </Form.Control> */}
                   </Col>
                   <Col md={2}>
                     <Button

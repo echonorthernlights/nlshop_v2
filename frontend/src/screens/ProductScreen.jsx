@@ -143,6 +143,14 @@ const ProductScreen = () => {
                         <Col>Qty :</Col>
                         <Col>
                           <Form.Control
+                            type="number"
+                            min={1}
+                            value={qty}
+                            max={[...Array(product.countInStock).keys()].length}
+                            onChange={(e) => setQty(Number(e.target.value))}
+                          />
+
+                          {/* <Form.Control
                             as="select"
                             value={qty}
                             onChange={(e) => setQty(Number(e.target.value))}
@@ -155,7 +163,7 @@ const ProductScreen = () => {
                                 </option>
                               )
                             )}
-                          </Form.Control>
+                          </Form.Control> */}
                         </Col>
                       </Row>
                     </ListGroup.Item>
