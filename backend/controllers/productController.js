@@ -6,9 +6,19 @@ import asyncHandler from "../middleware/asyncHandler.js";
 //GET /products
 //Access Public
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({}).lean();
+  //Pagination logic
+  const pageSize = 12;
+  const page = req.query.pageNumber || 1;
+  const count = await Product.countDocuments();
+
+  const products = await Product.find({})
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  //End pagination
   if (products) {
-    return res.status(200).json(products);
+    return res
+      .status(200)
+      .json({ products, page, pages: Math.ceil(count / pageSize) });
   } else {
     res.status(404);
     throw new Error("Products not found !!!");
