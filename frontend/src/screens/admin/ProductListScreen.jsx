@@ -2,9 +2,13 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
-import { useCreateProductMutation } from "../../slices/productsApiSlice";
+import {
+  useCreateProductMutation,
+  useDeleteProductMutation,
+} from "../../slices/productsApiSlice";
 
 import { useGetProductsQuery } from "../../slices/productsApiSlice";
 
@@ -15,7 +19,21 @@ const ProductListScreen = () => {
     { isLoading: loadingCreateProduct, error: errorCreateProduct },
   ] = useCreateProductMutation();
 
-  const deleteHandler = () => {};
+  const [
+    deleteProduct,
+    { isLoading: loadingDeleteProduct, error: errorDeleteProduct },
+  ] = useDeleteProductMutation();
+
+  const deleteHandler = async (productId) => {
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      try {
+        await deleteProduct(productId);
+        refetch();
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
+  };
   const createProductHandler = async () => {
     if (window.confirm("Are you sure you want to create a new product?")) {
       try {
@@ -66,7 +84,7 @@ const ProductListScreen = () => {
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
                   <td>
-                    <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                    <LinkContainer to={`/admin/products/${product._id}/edit`}>
                       <Button variant="light" className="btn-sm mx-2">
                         <FaEdit />
                       </Button>
