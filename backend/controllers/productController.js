@@ -7,7 +7,7 @@ import asyncHandler from "../middleware/asyncHandler.js";
 //Access Public
 const getProducts = asyncHandler(async (req, res) => {
   //Pagination logic
-  const pageSize = 12;
+  const pageSize = 2;
   const page = req.query.pageNumber || 1;
   const count = await Product.countDocuments();
 
