@@ -6,7 +6,7 @@ import asyncHandler from "../middleware/asyncHandler.js";
 //@access Public
 const getProducts = asyncHandler(async (req, res) => {
   //Pagination logic
-  const pageSize = 1;
+  const pageSize = process.env.PAGINATION_LIMIT;
   const page = req.query.pageNumber || 1;
 
   //Construct keyword object for query search
@@ -88,7 +88,6 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.countInStock = countInStock;
 
     const updatedProduct = await product.save();
-    console.log(updatedProduct);
     res.json(updatedProduct);
   } else {
     res.status(404);
