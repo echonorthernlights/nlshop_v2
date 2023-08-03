@@ -7,14 +7,20 @@ import asyncHandler from "../middleware/asyncHandler.js";
 //Access Public
 const getProducts = asyncHandler(async (req, res) => {
   //Pagination logic
-  const pageSize = 12;
+  const pageSize = 1;
   const page = req.query.pageNumber || 1;
-  const count = await Product.countDocuments();
 
-  const products = await Product.find({})
+  //Construct keyword object for query search
+  const keyword = req.query.keyword
+    ? { name: { $regex: req.query.keyword, $options: "i" } }
+    : {};
+  const count = await Product.countDocuments({ ...keyword });
+
+  const products = await Product.find({ ...keyword })
     .limit(pageSize)
     .skip(pageSize * (page - 1));
   //End pagination
+  console.log("products", products);
   if (products) {
     return res
       .status(200)
@@ -143,6 +149,19 @@ const createProductReview = asyncHandler(async (req, res) => {
     throw new Error("Product not found");
   }
 });
+//Desc get top three product (rating)
+//GET /api/products/top
+//Access Public
+const getTopRatedProducts = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+  if (products) {
+    return res.status(200).json(products);
+  } else {
+    res.status(404);
+    throw new Error("Products not found !!!");
+  }
+});
 
 export {
   getProduct,
@@ -151,4 +170,5 @@ export {
   deleteProduct,
   updateProduct,
   createProductReview,
+  getTopRatedProducts,
 };
