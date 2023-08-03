@@ -1,10 +1,9 @@
 //import products from "../data/products.js";
 import Product from "../models/Product.js";
 import asyncHandler from "../middleware/asyncHandler.js";
-
-//Desc get all products
-//GET /products
-//Access Public
+//@desc get all products
+//@route GET  /products
+//@access Public
 const getProducts = asyncHandler(async (req, res) => {
   //Pagination logic
   const pageSize = 1;
@@ -20,7 +19,6 @@ const getProducts = asyncHandler(async (req, res) => {
     .limit(pageSize)
     .skip(pageSize * (page - 1));
   //End pagination
-  console.log("products", products);
   if (products) {
     return res
       .status(200)
@@ -31,9 +29,9 @@ const getProducts = asyncHandler(async (req, res) => {
   }
 });
 
-//Desc get product by Id
-//GET /products
-//Access Public
+//@desc get product by Id
+//@route GET  /products;:id
+//@access Public
 const getProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const product = await Product.findById(id).lean();
@@ -45,9 +43,9 @@ const getProduct = asyncHandler(async (req, res) => {
   }
 });
 
-//Desc create new product
-//POST /products
-//Access Private/Admin
+//@desc   create new product
+//@route  POST  /products
+//@access Private/Admin
 
 const createProduct = asyncHandler(async (req, res) => {
   const newProduct = new Product({
@@ -72,9 +70,9 @@ const createProduct = asyncHandler(async (req, res) => {
   }
 });
 
-// DESC    Update a product
-// PUT     /api/products/:id
-// Access  Private/Admin
+// @desc    Update a product
+// @route   PUT /api/products/:id
+// @access  Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
   const { name, price, description, image, brand, category, countInStock } =
     req.body;
@@ -98,9 +96,9 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 });
 
-// DESC    Update a product
-// PUT     /api/products/:id
-// Access  Private/Admin
+// @desc    Update a product
+// @route   PUT  /api/products/:id
+// @access  Private/Admin
 const deleteProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
@@ -112,9 +110,9 @@ const deleteProduct = asyncHandler(async (req, res) => {
   }
 });
 
-// DESC    Create a product review
-// PUT     /api/products/:id/reviews
-// Access  Private
+// @desc   Create a product review
+// @route  POST /api/products/:id/reviews
+// @access  Private
 const createProductReview = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
   const { rating, comment } = req.body;
@@ -149,9 +147,9 @@ const createProductReview = asyncHandler(async (req, res) => {
     throw new Error("Product not found");
   }
 });
-//Desc get top three product (rating)
-//GET /api/products/top
-//Access Public
+//@desc  get top three product (rating)
+//@route GET /api/products/top
+//@access Public
 const getTopRatedProducts = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const products = await Product.find({}).sort({ rating: -1 }).limit(3);

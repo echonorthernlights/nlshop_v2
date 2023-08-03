@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import axios from "axios";
 import Product from "../components/Product";
 import { useGetProductsQuery } from "../slices/productsApiSlice.js";
 import Loader from "../components/Loader";
@@ -9,6 +7,7 @@ import { useParams } from "react-router-dom";
 import Paginate from "../components/Paginate";
 import { Link } from "react-router-dom";
 import ProductCarousel from "../components/ProductCarousel";
+import Meta from "../components/Meta";
 const HomeScreen = () => {
   /*const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -43,6 +42,7 @@ const HomeScreen = () => {
       ) : (
         <>
           {" "}
+          <Meta />
           <h1>Latest Products</h1>
           <Row>
             {data.products.map((product) => (

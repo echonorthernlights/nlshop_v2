@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
   Form,
@@ -8,7 +8,6 @@ import {
   ListGroup,
   Card,
   Button,
-  ListGroupItem,
 } from "react-bootstrap";
 import Rating from "../components/Rating";
 import { toast } from "react-toastify";
@@ -22,7 +21,7 @@ import Message from "../components/Message";
 import { addToCart } from "../slices/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import Meta from "../components/Meta";
 const ProductScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -94,6 +93,7 @@ const ProductScreen = () => {
             Go back
           </Link>
           <Row>
+            <Meta title={product.name} />
             <Col md={5}>
               <Image src={product.image} fluid />
             </Col>
