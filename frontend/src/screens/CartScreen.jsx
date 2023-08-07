@@ -13,6 +13,7 @@ import {
 import { FaTrash } from "react-icons/fa";
 import Message from "../components/Message";
 import { addToCart, removeFromCart } from "../slices/cartSlice";
+import { toast } from "react-toastify";
 const CartScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -55,9 +56,13 @@ const CartScreen = () => {
                       min={1}
                       value={item.qty}
                       max={[...Array(item.countInStock).keys()].length}
-                      onChange={(e) =>
-                        addToCartHandler(item, Number(e.target.value))
-                      }
+                      onChange={(e) => {
+                        if (item.countInStock >= Number(e.target.value)) {
+                          addToCartHandler(item, Number(e.target.value));
+                        } else {
+                          toast.error("Number of units exceeds inventory !");
+                        }
+                      }}
                     />
                     {/* <Form.Control
                       as="select"

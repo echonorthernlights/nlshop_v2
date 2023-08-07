@@ -147,7 +147,18 @@ const ProductScreen = () => {
                             min={1}
                             value={qty}
                             max={[...Array(product.countInStock).keys()].length}
-                            onChange={(e) => setQty(Number(e.target.value))}
+                            onChange={(e) => {
+                              if (
+                                product.countInStock >= Number(e.target.value)
+                              ) {
+                                setQty(Number(e.target.value));
+                              } else {
+                                setQty(product.countInStock);
+                                toast.error(
+                                  "Number of units exceeds inventory !"
+                                );
+                              }
+                            }}
                           />
 
                           {/* <Form.Control
